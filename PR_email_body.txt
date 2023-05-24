@@ -1,0 +1,12 @@
+Dear [User],
+
+We have received a request to reset your password. If you did not make this request, please ignore this email.
+                
+To reset your password, please click the link below:
+                
+[Password Reset Link]
+                
+If you have any questions or concerns, please contact us at nirv4n4.supp0rt@gmail.com
+                
+Best regards,
+Nirvana

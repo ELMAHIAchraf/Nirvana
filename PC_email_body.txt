@@ -1,0 +1,10 @@
+Dear [Customer Name],
+
+Thank you for placing an order on our website. We appreciate your business and hope that you enjoy your purchase.
+Invoice: [Invoice]
+To cancel your order, please visit [insert URL] and enter your order ID. 
+Please note that the cancellation window is valid for 24 hours from the time of your order.
+After this period, we won't be able to process cancellations.
+
+Best regards,
+The Nirvana Team

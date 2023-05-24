@@ -1,0 +1,187 @@
+body{
+    background-color: #DDDDDD;
+    margin: 0;
+}
+html{
+    scroll-behavior: smooth;
+}
+::-webkit-scrollbar{
+    width: 0.7vw;
+}
+::-webkit-scrollbar-track{
+    background-color: #a69eff;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #6c5fff;
+}
+#empty-wishlist-div{
+    margin: auto;
+    background-color: white;
+    width: 70%;
+    height: 250px;
+    border-radius: 25px;
+    margin-top: 14%;
+    grid-template-rows: repeat(3, 33%);
+    display: none;
+}
+#heartIcon{
+    color: #ee4747;
+    font-size: 4vw;
+    justify-self: center;
+    align-self: center;
+    margin-top: 5%;
+}
+#header, #par{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 500;
+    color: #2a2a2a;
+    justify-self: center;
+
+}
+#header{
+    font-size: 1.7vw;
+}
+#par{
+    font-size: 1.2vw;
+}
+#main{
+    position: absolute;
+    width: 100%;
+    top: 8vh;
+}
+.product-div{
+    background-color: white;
+    width: 35%;
+    height: 15vw;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 15% 35% 35% 15%;
+    grid-template-rows: 10% 40% 40% 10%;
+    align-items: center;
+    margin: auto;
+    margin-top: 2%;
+    cursor: pointer;
+}
+.check{
+    width: 30%;
+    height: 30%;
+    border-radius: 20%;
+    caret-color: #5868ff;
+    grid-column-start: 1;
+    grid-row: 2/4;
+    justify-self: center;
+    accent-color: #5C4EFF;
+    cursor: pointer;
+}
+.product-image{
+    width: 70%;
+    height: 100%;
+    grid-column-start: 2;
+    grid-row: 2/4;
+    justify-self: center;
+}
+.product-name{
+    grid-column-start: 3;
+    grid-row-start: 2;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 500;
+    font-size: 1.25vw;
+    color: #2a2a2a;
+    margin-top: 15%;
+}
+.product-price{
+    grid-column-start: 3;
+    grid-row-start: 3;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bolder;
+    font-size: 1.25vw;
+    color: #2a2a2a;
+    margin-top: -10%;
+}
+.heartForm{
+    grid-column-start: 4;
+    grid-row: 2/4;
+}
+.heartButt{
+    background-color: transparent;
+    border-style: none;
+    width: 100%;
+    cursor: pointer;
+    justify-self: center;
+}
+.heart{
+    color: #ee4747;
+    font-size: 2.5vw;
+}
+#remove{
+    width: 100%;
+    height: 6vh;
+    border-radius: 25px;
+    background-color: #5C4EFF;
+    color: white;
+    border-style: none;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.4vw;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 2px 2px #7e7e7e;
+    transition: transform 0.5s;
+}
+#remove:hover{
+    transform: scale(1.05);
+    transition: transform 0.5s;
+}
+#remove-form{
+    width: 20%;
+    margin: auto;
+    margin-top: 2%;
+    padding-bottom: 30px;
+}
+/*#transparent-bg{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.750);
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+#notification-div{
+    width:30%;
+    height: auto;
+    background-color: white;
+    border-radius: 30px;
+    padding: 1%;
+    padding-bottom: 2%;
+   
+}
+ @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+#message{
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 500;
+    font-size: 1.3vw;
+    text-align: center;
+    color: #4d4d4d;
+}
+#ok{
+    width: 30%;
+    height: 5.5vh;
+    margin-top: 0.5%;
+    margin-left: 8%;
+    border-radius: 25px;
+    background-color : #6e61ff;
+    color: white;
+    border-style: none;
+    font-size: 1.3vw;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 2px 2px #7e7e7e;
+    transform: scale(1);
+    transition: transform 0.5s;
+    margin-left: 35%;
+}
+#ok:hover{
+    transform: scale(1.03);
+    transition: transform 0.5s;
+} */

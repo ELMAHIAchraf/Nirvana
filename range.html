@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+    <style>
+        body{
+            background-color:  rgb(25, 35, 43);
+            font-family: sans-serif;
+        }
+        a{
+            text-decoration: none;
+            color: aliceblue;
+        }
+        i{
+            cursor: pointer;
+        }
+        .container{
+            position: relative;
+            display: grid;
+            grid-template-columns: 240px auto ;
+            height: 97vh;
+            column-gap: 10px;
+            overflow: hidden;
+        }
+        aside{
+            display: grid;
+            grid-template-rows: 80px 235px calc(95vh - 315px);
+            grid-template-columns: 240px;
+        }
+        aside div.logo a{
+            padding: 5px;
+            font-size: 26px;
+        }
+        .logo a img{
+            width: 50px;
+        }
+        aside div{
+            color: aliceblue;
+            font-size: 17px;
+        }
+        aside div a{
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-radius: 7px;
+            text-transform: capitalize;
+        }
+        aside div a:hover{
+            color: royalblue;
+        }
+        div.playlists{
+            grid-template-rows: repeat(5,50px);
+            overflow-y: scroll;
+        }
+            /* scrollbar */
+
+        ::-webkit-scrollbar{
+            width: 3px;
+        }
+        ::-webkit-scrollbar-thumb{
+            background-color:  royalblue;
+        }
+        ::-webkit-scrollbar-track{
+            background-color:  rgb(25, 35, 43);
+        }
+        .display-box{
+            border-radius: 10px;
+            grid-row-start: 1;
+            grid-column-start: 2;
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: 70px calc(97vh - 140px) 70px;
+        }
+
+        /* header */
+
+        .display-box header{
+            background-color: aliceblue;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            display: grid;
+            grid-template-columns: repeat(3,40px);
+            grid-template-rows: 40px;
+            column-gap: 20px;
+            padding: 14px;
+        }
+        .display-box header a{
+            background-color: royalblue;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: aliceblue;
+        }
+        .display-box header a.premium{
+            grid-column-start: 4;
+            justify-self: end;
+            width: 100px;
+            border-radius: 20px;
+        }
+
+        /* footer */
+
+        .display-box footer{
+            background-color: aliceblue;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            grid-row: 3/4;
+            display: grid;
+            grid-template-columns: repeat(3,32%);
+            grid-template-rows:3% 97%;
+            column-gap: 20px;
+        }
+
+        /* song progress */
+        .display-box footer #progressBar{
+            width: 0%;
+            background-color: royalblue;
+            border-radius: 10px;
+            grid-column: 1/4;
+        }
+
+        /* song controls */
+        footer div.controls{
+            display: grid;
+            grid-template-columns: repeat(4,45px);
+            column-gap: 13px;
+            padding-left: 30px;
+            justify-content:flex-start;
+            align-items: center;
+        }
+
+        /* song infos */
+        footer div.infos{
+            font-size: 16px;
+            display: grid;
+            grid-template-rows: repeat(2,36%);
+            grid-template-columns: auto;
+            justify-content:center;
+            padding-top: 17px;
+        }
+        footer .infos .album{
+            font-size: 13px;
+        }
+        footer .infos a{
+            color: rgb(25, 35, 43);
+        }
+
+        /* song volume */
+        
+        footer div.volume_sitting{
+            display: flex;
+            align-items: center;
+            justify-content:flex-end;
+            padding-right: 20px;
+        }
+        footer div.volume_sitting #volume{
+            width: 100px;
+            height: 2px;
+            border-radius: 3px;
+        }
+        /* range color */
+        #volume {
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgb(80, 115, 221);
+        }
+        #volume::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgb(47, 84, 197);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        /* main div */
+        div.main{
+            background-color:  aliceblue;
+            padding: 20px;
+            display: grid;
+            grid-template-rows: repeat(3,390px);
+            grid-template-columns: 70vw;
+            row-gap: 50px;
+            justify-content: center;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        /* main scrollbar */
+        div.main::-webkit-scrollbar{
+            width: 5px;
+        }
+
+        /* main sections */
+        div.main div{
+            display: grid;
+            grid-template-rows: 40px auto 15px;
+            row-gap: 10px;
+            overflow-y: hidden;
+        }
+        div.main .elements{
+            display: grid;
+            grid-template-columns: repeat(4,230px);
+            grid-template-rows: auto;
+            column-gap: 40px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        /* element */
+
+        div.main div.elements div.element{
+            border-radius: 10px;
+            display: grid;
+            grid-template-rows: 78% 7% 7%;
+            row-gap: 10px;
+            cursor: pointer;
+        }
+        div.main .element .cover{
+            border-radius:10px ;
+            width: 230px;
+        }
+        div.main .element p{
+            font-size: 17px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        div.main .element .element-type{
+            font-size: 10px;
+            color: grey;
+        }
+
+        /* elements scrollbar */
+
+        div.main .elements::-webkit-scrollbar{
+            height: 5px;
+            border-radius: 5px;
+        }
+        div.main .title{
+            font-size: 25px;
+            font-weight: bold;
+            padding: 6px;
+        }
+        div.main .show-more{
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+            let audio = new Audio("7AM Playboicarti.mp3");
+            audio.load();
+        function playSong(){
+            let btn=document.getElementById('playBtn');
+            if(btn.className=="fa-solid fa-play fa-2xl"){
+            audio.play();
+            btn.className="fa-solid fa-pause fa-2xl";
+            audio.addEventListener("timeupdate",function(){
+                let progress=(audio.currentTime*100/audio.duration);
+                document.getElementById('progressBar').style.width=progress+"%";
+            });
+            }else{
+            audio.pause();
+            btn.className="fa-solid fa-play fa-2xl";
+            }
+        }
+        function replay(){
+            audio.currentTime=0;
+            audio.play();
+            document.getElementById('playBtn').className="fa-solid fa-pause fa-2xl";
+        }
+    </script>
+    <?php
+        $conn=mysqli_connect("localhost","root","","music_db") or die("ERROR : ".mysqli_connect_error());
+        $rands = array();
+        for($i=0;$i<4;$i++){
+            $rand=rand(1,8);
+            while(in_array($rand,$rands)){
+                $rand=rand(1,8);
+            }
+                $rands[]=$rand;
+        }
+        $sql="SELECT * FROM albums WHERE album_id=$rands[0] or album_id=$rands[1] or album_id=$rands[2] or album_id=$rands[3]";
+        $query=mysqli_query($conn,$sql);
+        while($tab=mysqli_fetch_assoc($query)){
+            $albums[]=$tab;
+        }
+    ?>
+    <div class="container">
+        <aside>
+            <div class="logo">
+                <a href="index.php" style="color: #98e4ea;"> Spotify </a>
+            </div>
+            <div class="menu">
+                    <a href="home.php" style="background-color: royalblue;">home</a> 
+                    <a href="home.php">search</a> 
+                    <a href="home.php">genres</a> 
+                    <a href="home.php">favorites</a> 
+            </div>
+            <div class="playlists">
+                <a href="">my playlist1</a>
+                <a href="">my playlist2</a>
+                <a href="">my playlist3</a>
+                <a href="">my playlist4</a>
+                <a href="">my playlist5</a>
+                <a href="">my playlist1</a>
+                <a href="">my playlist2</a>
+                <a href="">my playlist3</a>
+                <a href="">my playlist4</a>
+                <a href="">my playlist5</a>
+            </div>
+        </aside>
+        <div class="display-box">
+            <header>
+                <a href="" class="account">S</a>
+                <a href="" class="settings" style="background-color: transparent;"><i class="fa-solid fa-gear fa-2xl" style="color: royalblue;"></i></a>
+                <a href="" class="display-mode" style="background-color: transparent;"><i class="fa-solid fa-circle-half-stroke fa-2xl" style="color: royalblue;"></i></a>
+                <a href="" class="premium"><i class="fa-sharp fa-solid fa-crown fa-fade"></i>&nbsp;Upgrade</a>
+            </header>
+            <div class="main">
+                <div class="albums">
+                    <div class="title">
+                        Albums
+                    </div>
+                    <div class="elements">
+                        <div class="element"><img class="cover" src="albums/album (<?php echo $albums[0]['album_id'] ?>)/cover.jpg" alt="" onclick=""><p class="element-name"><?php echo $albums[0]['album_name'] ?></p><p class="element-type">Album</p></div>
+                        <div class="element"><img class="cover" src="albums/album (<?php echo $albums[1]['album_id'] ?>)/cover.jpg" alt=""><p class="element-name"><?php echo $albums[1]['album_name'] ?></p><p class="element-type">Album</p></div>
+                        <div class="element"><img class="cover" src="albums/album (<?php echo $albums[2]['album_id'] ?>)/cover.jpg" alt=""><p class="element-name"><?php echo $albums[2]['album_name'] ?></p><p class="element-type">Album</p></div>
+                        <div class="element"><img class="cover" src="albums/album (<?php echo $albums[3]['album_id'] ?>)/cover.jpg" alt=""><p class="element-name"><?php echo $albums[3]['album_name'] ?></p><p class="element-type">Album</p></div>
+                    </div>
+                    <div class="show-more">
+                        Show more
+                    </div>
+                </div>
+                <div class="artists">
+                    <div class="title">
+                        Artists
+                    </div>
+                    <div class="elements">
+                        <div class="element"><img src="" alt=""></div>
+                        <div class="element"><img src="" alt=""></div>
+                        <div class="element"><img src="" alt=""></div>
+                        <div class="element"><img src="" alt=""></div>
+                    </div>
+                    <div class="show-more">
+                        Show more
+                    </div>
+                </div>
+                <div class="playlists">
+                    <div class="title">
+                        Playlists
+                    </div>
+                    <div class="elements">
+                        <div class="element"><img src="" alt=""></div>
+                        <div class="element"><img src="" alt=""></div>
+                        <div class="element"><img src="" alt=""></div>
+                        <div class="element"><img src="" alt=""></div>
+                    </div>
+                    <div class="show-more">
+                        Show more
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <input type="range" id="vol" name="vol" min="0" max="" id="progressBar">
+                <div class="controls">
+                    <i class="fa-solid fa-backward-step fa-xl" onclick="replay()"></i>
+                    <i class="fa-solid fa-play fa-2xl" onclick="playSong();" id="playBtn"></i>
+                    <i class="fa-solid fa-forward-step fa-xl"></i>
+                    <i class="fa-solid fa-repeat fa-lg"></i>
+                </div>
+                <div class="infos">
+                    <a class="title" href="">iLoveUIHateU</a>
+                    <a class="album" href="">whole lotta red</a>
+                </div>
+                <div class="volume_sitting">
+                    <i class="fa fa-volume-up"></i>&nbsp;
+                    <input type="range" id="volume" min="0" max="100">
+                </div>
+            </footer>
+        </div>
+    </div>
+
+</body>
+</html>
