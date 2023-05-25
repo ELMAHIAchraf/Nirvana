@@ -54,7 +54,7 @@
                     $to = $email;
                     $subject = "Password reset";
                     $body = $fileContent;
-                    $header="From: nirv4n4.supp0rt@gmail.com";
+                    $header = "Content-Type: text/html; charset=UTF-8";
                     if(mail($to, $subject, $body, $header)){
                         echo "<script>notify('Email sent successfully to $email')</script>";
                     }else{

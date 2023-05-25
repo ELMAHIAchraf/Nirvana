@@ -16,12 +16,12 @@
     <?php 
     include('NavBar.php');
 
-        $ids="";
-        $params=array_slice($_GET, 1);
-        foreach($params as $key=>$value){
-            $ids.=$key."=".$value."&";
-        }
-        $ids=substr($ids, 0, strlen($ids)-1);   
+        // $ids="";
+        // $params=array_slice($_GET, 1);
+        // foreach($params as $key=>$value){
+        //     $ids.=$key."=".$value."&";
+        // }
+        // $ids=substr($ids, 0, strlen($ids)-1);   
 
         $sql="SELECT price, quantity, name_article FROM articles NATURAL JOIN cart WHERE id_client={$_SESSION['id_client']}";
         $query=mysqli_query($conn, $sql);
@@ -39,9 +39,10 @@
             }else{
                 $consiseName.=$tab['2'];
             }
-            $description.=$consiseName."(...), ";
+            $description.=$consiseName."(...),";
         }
-        echo $description=str_replace("'", "\'", $description);
+        $description=substr($description, 0, strlen($description)-1);
+        $description=str_replace("'", "\'", $description);
 
         
     ?>
@@ -67,36 +68,42 @@
                     let client_secret=JSON.parse(xhr.responseText);
                     let transStatus=stripe.confirmCardPayment(client_secret.client_secret, {
                         payment_method: {card:cardNumElem}
-                    }); 
-                    if(transStatus.error){
-                        notify(`
-                            Error: ${transStatus.error.message}`
-                        );
-                    }else{
-                        let xhr2 = new XMLHttpRequest();
-                        let order_token='order_token=';
-                        xhr2.onload=function(){
-                            if(xhr2.status==200){
-                                order_token+=xhr2.responseText;
+                    }).then(function(transaction){
+                        if(transaction.error){
+                            notify(`
+                                Error: ${transaction.error.message}`
+                            );
+                        }else{
+                            let xhr2 = new XMLHttpRequest();
+                            let order_token='order_token=';
+                            xhr2.onload=function(){
+                                if(xhr2.status==200){
+                                    order_token+=xhr2.responseText;
+                                }
                             }
-                        }
-                        xhr2.open('GET', "addToOrders.php?<?php echo $ids?>", false);
-                        xhr2.send();
-                       
-                        let xhr3 = new XMLHttpRequest();
-                        xhr3.open('GET', "paymentEmail.php?"+order_token, true);
-                        xhr3.send();
-                         
-                        document.getElementById('loading').style.display='none';
-   
+                            <?php /*echo $ids*/?>
+                            xhr2.open('POST', "addToOrders.php", false);
+                            xhr2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                            xhr2.send("transaction_id="+transaction.paymentIntent.id);
                         
-                        notify(`
-                            Status: ${transStatus.status}<br>
-                            Transaction ID:${transStatus.id}<br>
-                            Description:${transStatus.description}<br>
-                            Amount:${transStatus.amount/100} ${transStatus.currency}
-                        `);
-                    }
+                            let xhr3 = new XMLHttpRequest();
+                            xhr3.open('GET', "paymentEmail.php?"+order_token, true);
+                            xhr3.send();
+                            
+                            document.getElementById('loading').style.display='none';
+
+                            document.getElementById('notification-div').style.width='34%';
+                            document.getElementById('message').style.textAlign='left';
+                            let description=transaction.paymentIntent.description.replace(/\(...\),/g, "(...)<br>&ensp;&ensp;&ensp;");
+
+                            notify(`
+                                Status: ${transaction.paymentIntent.status}<br>
+                                Order ID: ${xhr2.responseText}<br>
+                                Description: ${description}<br>
+                                Amount: ${transaction.paymentIntent.amount/100} ${transaction.paymentIntent.currency}
+                            `);
+                        }
+                    })
                 }
             }
             xhr.open('POST', "payment.php", true);

@@ -44,38 +44,43 @@
                     let client_secret=JSON.parse(xhr.responseText);
                     let transStatus=stripe.confirmCardPayment(client_secret.client_secret, {
                         payment_method: {card:cardNumElem}
-                    }); 
-                    if(transStatus.error){
-                        notify(`
-                            Error: ${transStatus.error.message}`
-                        );
-                    }else{
-                        let xhr2 = new XMLHttpRequest();
-                        let order_token='order_token=';
-                        xhr2.onload=function(){
-                            if(xhr2.status==200){
-                                order_token+=xhr2.responseText;
+                    }).then(function(transaction){
+                        if(transStatus.error){
+                            notify(`
+                                Error: ${transaction.error.message}`
+                            );
+                        }else{
+                            let xhr2 = new XMLHttpRequest();
+                            let order_token='order_token=';
+                            xhr2.onload=function(){
+                                if(xhr2.status==200){
+                                    order_token+=xhr2.responseText;
+                                }
                             }
-                        }
-                        xhr2.open('GET', "DaddToOrders.php?id_article=<?php echo $_GET['id_article']?>&color=<?php echo $_GET['color']?>&quantity=<?php echo $_GET['quantity']?>&id_color=<?php echo $_GET['id_color']?>", false);
-                        xhr2.send();
-                       
-                        let xhr3 = new XMLHttpRequest();
-                        xhr3.open('GET', "paymentEmail.php?"+order_token, true);
-                        xhr3.send();
-                         
-                        document.getElementById('loading').style.display='none';
-   
+                            xhr2.open('POST', "DaddToOrders.php", false);
+                            xhr2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                            xhr2.send("id_article=<?php echo $_GET['id_article']?>&color=<?php echo $_GET['color']?>&quantity=<?php echo $_GET['quantity']?>&id_color=<?php echo $_GET['id_color']?>&transaction_id="+transaction.paymentIntent.id);
                         
-                        notify(`
-                            Status: ${transStatus.status}<br>
-                            Transaction ID:${transStatus.id}<br>
-                            Description:${transStatus.description}<br>
-                            Amount:${transStatus.amount/100} ${transStatus.currency}
-                        `);
+                            let xhr3 = new XMLHttpRequest();
+                            xhr3.open('GET', "paymentEmail.php?"+order_token, true);
+                            xhr3.send();
+                            
+                            document.getElementById('loading').style.display='none';
+
+                            document.getElementById('notification-div').style.width='34%';
+                            document.getElementById('message').style.textAlign='left';
+                            let description=transaction.paymentIntent.description.replace(/\(...\),/g, "(...)<br>");
+                            notify(`
+                                Status: ${transaction.paymentIntent.status}<br>
+                                Order ID: ${xhr2.responseText}<br>
+                                Description: ${description}<br>
+                                Amount: ${transaction.paymentIntent.amount/100} ${transaction.paymentIntent.currency}
+                            `);
+                        }
+                        });
                     }
+
                 }
-            }
             xhr.open('POST', "payment.php", true);
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.send("amount="+<?php if($amount) echo $amount?>+"&description="+"<?php if(isset($_GET['description'])) echo $_GET['description']?>");

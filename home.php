@@ -182,7 +182,7 @@
             <div id="right-footer">
                 <p>Contacts</p>
                 <p>+21258852014</p>
-                <p>nirv4n4.supp0rt@gmail.com</p>
+                <a href="mailto:nirv4n4.supp0rt@gmail.com">nirv4n4.supp0rt@gmail.com</a>
             </div>
         </div>
                     </div>

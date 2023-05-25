@@ -311,7 +311,7 @@
     </div>
     
     <div id="goUpContainer">
-            <a href="#"><i id="goUp" class="fa-solid fa-arrow-up"></i></a>
+            <a href="#"><i id="goUp" class="fa-solid fa-angle-up"></i></a>
     </div>  
     </div>      
 

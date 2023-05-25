@@ -49,7 +49,7 @@
                 $default="Default";
             }
 
-            echo $delivryRangeValue=floor((time()-strtotime($tab['date_commande']))/3600/24);
+            $delivryRangeValue=floor((time()-strtotime($tab['date_commande']))/3600/24);
             echo "
                 <div class='product-div' onclick='redirect({$tab['id_article']})'>
                     <img class='product-img' src='../PFEProduct/products images/product {$tab['id_article']}/{$tab['id_color']}/item img1.jpg' alt='product image'>

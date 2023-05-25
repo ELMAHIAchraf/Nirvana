@@ -11,7 +11,6 @@
     $to = $_SESSION['email_client'];
     $subject = "Purchase confirmation";
     $body = $fileContent;
-    $header="From: nirv4n4.supp0rt@gmail.com";
-
+    $header = "Content-Type: text/html; charset=UTF-8";
     mail($to, $subject, $body, $header);
 ?>

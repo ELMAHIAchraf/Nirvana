@@ -20,8 +20,8 @@
 
         
         $textCellContent=array("Order N : ", "Date :", "Client name :", "Address :");
-        $textCellWidth=array(18, 12, 25, 15);
-        $dataCellWidth=array(35, 38, 28, 117);
+        $textCellWidth=array(18, 12, 25, 19);
+        $dataCellWidth=array(35, 38, 28, 114);
         $dataCellContent=array( $order_token, $tab['date_commande'], $tab['Fname']." ".$tab['Lname'], $tab['adress']);
 
         for($i=0; $i<count($textCellContent); $i++){
