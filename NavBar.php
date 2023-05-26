@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -143,7 +143,7 @@
         background-size: 20px 20px;
         background-repeat: no-repeat;
         background-position: right center;
-        padding-right: 4px;
+        padding-right: 16px;
         padding-left: 4px;
         float: right;
         background-image: url("caret.svg");
@@ -151,7 +151,7 @@
     }
 
     #searchInp{
-        width: 55%;
+        width: 58%;
         height: 4vh;
         border-style: none;
         outline-color: #5868ff;
@@ -195,18 +195,19 @@
         color: white;
     }
     #search-results{
-    width: 15.3%;
+    width: 16.2%;
     background-color: white;
     position: fixed;
     top: 6vh;
     right: 19.3%;
     display: none;
     z-index: 100;
-    min-height: 2vh;
+    /* min-height: 2vh; */
     }
     .search-result{
         width: 100%;
         border-bottom: 1px solid gray;
+        padding-top: -5px;
         cursor: pointer;
     }
     .search-par{
@@ -214,7 +215,9 @@
         font-weight: 500;
         font-size: 1.05vw;
         color: #2a2a2a;
-        padding-left: 10%;
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: left;
     }
     </style>
 </head>
