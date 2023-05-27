@@ -41,7 +41,7 @@
                     $query2=mysqli_query($conn, $sql2);
                     $tab2=mysqli_fetch_assoc($query2);
                     if(empty($tab2)){
-                        $sql3="INSERT INTO precovery VALUES('$token', '$email', '$token_creation_time', '$id_client')";
+                        $sql3="INSERT INTO precovery VALUES('$token', '$token_creation_time', $id_client)";
                     }else{
                         $sql3="UPDATE precovery SET token='$token',token_creation_time='$token_creation_time' WHERE id_client='{$tab['id_client']}'";
                     }

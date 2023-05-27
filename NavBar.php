@@ -337,6 +337,7 @@
             //     header("Location: http://localhost/Login/Nirvana/home.php");
             // }
             if(isset($_POST['logout']) && !empty($_POST['logout'])){
+                setcookie("token", "", time()-3600);
                 unset($_COOKIE['token']);
                 session_destroy();
                 echo "<script>window.open('http://localhost/Login/Nirvana/home.php', '_self')</script>";

@@ -225,8 +225,28 @@
                     }
                     $description=$consiseName."(...)";
                     $description=str_replace("'", "\'", $description);
+
+                    if(isset($_SESSION) && !empty($_SESSION)){
+                        $sql="SELECT adress FROM client WHERE id_client={$_SESSION['id_client']}";
+                        $query=mysqli_query($conn, $sql);
+                        $tab=mysqli_fetch_assoc($query);
+                        $isAllowed=0;
+                        if($tab['adress']!=""){
+                            $isAllowed=1; 
+                        }
+                    }
                 ?>
-                <br><button id="buy-butt" onclick="parmsPrep();window.open('http\://localhost/Login/Nirvana/Dcheckout.php?id_article=<?php echo $tab6['id_article']?>&description=<?php echo $description?>&id_color='+clrDivId+'&color='+color+'&quantity='+quantity, '_self');"><i class="fa-regular fa-credit-card"></i>&ensp;Buy now</button>
+                <br><button id="buy-butt"
+                     <?php
+                     if(isset($_SESSION) && !empty($_SESSION)){
+                        if($isAllowed==0){
+                            echo "onclick=\"notify('Please update your account with your address to complete purchases.')\"";
+                        }else{
+                            echo "onclick=\"parmsPrep();window.open('http://localhost/Login/Nirvana/Dcheckout.php?id_article=".$tab6['id_article']."&description=".$description."&id_color='+clrDivId+'&color='+color+'&quantity='+quantity, '_self');\"";
+                        }
+                     }
+                ?>
+                ><i class="fa-regular fa-credit-card"></i>&ensp;Buy now</button>
                 <form id="addToCart-form">
                     <button type="button" id="addToCart-butt">
                     <?php
@@ -246,6 +266,10 @@
                         echo "<script>
                                 document.getElementById('addToCart-butt').addEventListener('click', function(){
                                     notify('Please log in to save this product to your cart.');
+                                });
+                                document.getElementById('buy-butt').onclick='';
+                                document.getElementById('buy-butt').addEventListener('click', function(){
+                                    notify('Please log in to buy this product.');
                                 });
                             </script>";
                     }

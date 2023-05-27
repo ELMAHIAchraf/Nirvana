@@ -14,13 +14,14 @@
         <img src="login image.jpg" id="login-image" alt="login image">
             <p id="title">Reset your password</p>
                 <form action="" method="POST">
-                    <input type="text" oninput="passwordCheck()" name="pwd" id="pwd" placeholder="Enter your new password">
-                    <br><input type="text" oninput="passwordCheck()" name="Cpwd" id="Cpwd" placeholder="Confirm your new password">
+                    <input type="password" oninput="passwordCheck()" name="pwd" id="pwd" placeholder="Enter your new password">
+                    <br><input type="password" oninput="passwordCheck()" name="Cpwd" id="Cpwd" placeholder="Confirm your new password">
                     <br><input type="submit" name="save" id="save" value="Save" disabled>
                 </form>
     </div>
     <?php
         include("connexion.php");
+        include("notification code.php");
 
         if(isset($_GET['token'])){             
             
@@ -38,15 +39,20 @@
                         $password=password_hash($password, PASSWORD_DEFAULT);
                         $sql2="UPDATE client SET password_client='$password' WHERE id_client={$tab['id_client']}";
                         if(mysqli_query($conn, $sql2)){
-                            echo "<script>alert('Your password has been successfully reset. You may now log in with your new password.')</script>";
+                            echo "<script>
+                                document.getElementById('ok').addEventListener('click', function(){
+                                    window.open('http://localhost/Login/Nirvana/login.php','_self');
+                                });
+                                notify('Your password has been successfully reset. You may now log in with your new password.');
+                            </script>";
                         }else{
-                            echo "<script>alert('Sorry, we were unable to reset your password. Please try again later.')</script>";
+                            echo "<script>notify('Sorry, we were unable to reset your password. Please try again later.')</script>";
                         }
                     
                 }  
             }
             }else{
-                echo "<script>alert('The password reset link has expired. Please request a new password reset to proceed.')</script>";
+                echo "<script>notify('The password reset link has expired. Please request a new password reset to proceed.')</script>";
             }
     }
     

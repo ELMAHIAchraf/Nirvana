@@ -113,37 +113,43 @@
                         }
                         echo "<script>document.getElementById('$category').selected='selected'</script>";
                 }else{
-                    // $randomIds= array();
-                    // for ($i=0; $i < 12; $i++) { 
-                    //     $randomValue=rand(1,60);
-                    //     if(!in_array($randomValue, $randomIds)){
-                    //      $randomIds[$i]=$randomValue;
-                    //     }else{
-                    //         $randomIds[$i]=rand(1,60);
-                    //     }
-                    // }
-                    // for ($j=0; $j < count($randomIds); $j++) { 
-                        $sql3="SELECT * FROM articles ORDER BY RAND() LIMIT 12";
-                        $query3=mysqli_query($conn, $sql3);
-                        $j=0;
-                        while($tab3=mysqli_fetch_assoc($query3)){
-                        echo "
-                        <div class='product-div' onclick='redirect({$tab3['id_article']})'>
-                            <div class='product-category'>
-                                <i class='fa-solid fa-list categoryI'></i>
-                                &ensp;<p class='categoryN'>{$tab3['category']}</p>
+                    $products=json_decode(file_get_contents("products.json"));
+                        if(date('Y-m-d')!=$products->date){
+                        $sql2="SELECT * FROM articles ORDER BY RAND() LIMIT 12";
+                        $query2=mysqli_query($conn, $sql2);
+                        $i=0;
+                        
+                        $products->date=date('Y-m-d');
+                        while($tab2=mysqli_fetch_assoc($query2)){
+                            $products->ids[$i]=(int)$tab2['id_article'];
+                            $i++;
+                        }
+                        $updatedProducts = json_encode($products, JSON_PRETTY_PRINT);
+                        file_put_contents("products.json", $updatedProducts);
+                    }
+                        for($j=0; $j<count($products->ids); $j++){
+                            $sql3="SELECT * FROM articles WHERE id_article={$products->ids[$j]}";
+                            $query3=mysqli_query($conn, $sql3);
+                            $tab3=mysqli_fetch_assoc($query3);
+                            echo "
+                            <div class='product-div' onclick='redirect({$tab3['id_article']})'>
+                                <div class='product-category'>
+                                    <i class='fa-solid fa-list categoryI'></i>
+                                    &ensp;<p class='categoryN'>{$tab3['category']}</p>
+                                </div>
+                                <img src='../PFEProduct/products images/product {$tab3['id_article']}/color1/item img1.jpg' alt='Product image' class='product-img'>
+                                <p class='product-name'>{$tab3['name_article']}</p>
+                                <p class='price'>$"."{$tab3['price']}</p>
+                                <form class='heart-form' id='heartForm$j'>
+                                    <button class='product-heart-butt' type='button' >
+                                        <i class='fa-solid fa-heart heart'  onmouseover='brokenHeart($j)' onmouseleave='normalHeart($j)'></i>
+                                    </button>
+                                </form>
+                                <input class='id_article' type='hidden' value='{$tab3['id_article']}'>
                             </div>
-                            <img src='../PFEProduct/products images/product {$tab3['id_article']}/color1/item img1.jpg' alt='Product image' class='product-img'>
-                            <p class='product-name'>{$tab3['name_article']}</p>
-                            <p class='price'>$"."{$tab3['price']}</p>
-                            <form class='heart-form' id='heartForm$j'>
-                                <button class='product-heart-butt' type='button' >
-                                    <i class='fa-solid fa-heart heart'  onmouseover='brokenHeart($j)' onmouseleave='normalHeart($j)'></i>
-                                </button>
-                            </form>
-                            <input class='id_article' type='hidden' value='{$tab3['id_article']}'>
-                        </div>
-                        ";
+                            ";
+
+                            
                         if(isset($_SESSION) && !empty($_SESSION)){
                             if(isInWishlist($tab3['id_article'])==1){
                                 echo "<script>document.getElementsByClassName('heart')[$j].style.color='rgb(238, 71, 71)';</script>";
@@ -162,7 +168,6 @@
                             });
                             </script>";
                         }
-                        $j++;
                     }
                 }
                 ?>
