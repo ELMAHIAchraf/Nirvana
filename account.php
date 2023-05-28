@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="logo image.png" type="image/x-icon">
     <title>Account</title>
     <style>
@@ -46,13 +45,13 @@
             font-size: 7vw;
             margin-bottom: 1%;
         }
-        .name, .logins, .adress, .save{
+        .name, .logins, .address, .save{
             width: 100%;
             display: flex;
             flex-wrap: nowrap;
             gap: 4%;
         }
-        .name-inp, .login-inp, .adress-inp{
+        .name-inp, .login-inp, .address-inp{
             width: 50%;
             height: 7.5vh;
             border-radius: 25px;
@@ -65,7 +64,7 @@
             padding-left: 10px;
             transition: transform 0.5s;
         }
-        #adress::placeholder{
+        #address::placeholder{
             color: #A49DFF;
         }
         .save{
@@ -91,7 +90,7 @@
             transform: scale(1.03);
             transition: transform 0.5s;
         }
-        #adress{
+        #address{
             width: 100%; 
         }
         #save{
@@ -108,7 +107,7 @@
             if(isset($_POST['fname']) and !empty($_POST['fname']) &&
                 isset($_POST['lname']) and !empty($_POST['lname']) &&
                 isset($_POST['email']) and !empty($_POST['email']) &&
-                isset($_POST['adress']) and !empty($_POST['adress'])){
+                isset($_POST['address']) and !empty($_POST['address'])){
                     
                     $fname=mysqli_real_escape_string($conn, htmlspecialchars(trim($_POST['fname'])));
 
@@ -117,14 +116,14 @@
                     $email=filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
                     $email=filter_var($email, FILTER_VALIDATE_EMAIL);
 
-                    $adress=mysqli_real_escape_string($conn, htmlspecialchars(trim($_POST['adress'])));
+                    $address=mysqli_real_escape_string($conn, htmlspecialchars(trim($_POST['address'])));
 
-                    $sql2="UPDATE client SET Fname='$fname', Lname='$lname', email='$email', adress='$adress' WHERE id_client={$_SESSION['id_client']}";
+                    $sql2="UPDATE client SET Fname='$fname', Lname='$lname', email='$email', address='$address' WHERE id_client={$_SESSION['id_client']}";
 
                     if(isset($_POST['pwd']) and !empty($_POST['pwd'])){
                         $password=mysqli_real_escape_string($conn, htmlspecialchars(trim($_POST['pwd'])));;
                         $password=password_hash($password, PASSWORD_DEFAULT);
-                        $sql2="UPDATE client SET Fname='$fname', Lname='$lname', email='$email', password_client='$password', adress='$adress' WHERE id_client={$_SESSION['id_client']}";
+                        $sql2="UPDATE client SET Fname='$fname', Lname='$lname', email='$email', password_client='$password', address='$address' WHERE id_client={$_SESSION['id_client']}";
                     }
                     mysqli_query($conn, $sql2);
             }
@@ -147,8 +146,8 @@
                 <input type="email" name="email" class="input login-inp" id="email" value="<?php echo $tab['email'] ?>">
                 <input type="password" name="pwd" class="input login-inp" id="pwd" placeholder="**********">
             </div>
-            <div class="adress">
-                <input type="text" name="adress" class="input adress-inp" id="adress" value="<?php echo $tab['adress'] ?>" placeholder="123 Main St, New York, 10001, USA">
+            <div class="address">
+                <input type="text" name="address" class="input address-inp" id="address" value="<?php echo $tab['address'] ?>" placeholder="123 Main St, New York, 10001, USA">
             </div>
             <div class="save">
                 <input type="submit" name="sub" class="save-inp" value="Save" id="save">

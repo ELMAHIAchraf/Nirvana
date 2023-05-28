@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="logo image.png" type="image/x-icon">
     <link rel="stylesheet" href="cart.css">
     <script src="cart.js" defer></script>
@@ -52,7 +51,7 @@
                     </div>
                     <p class='product-price'>$".$tab['price']*$tab['quantity']."</p>
                     <form class='cartForm'>
-                        <button type='button' class='cartButt' id='$i' onclick=\"resetIndexes('cartButt', 'inpColor');removeNotify('Are you sure you want to remove this item from your cart?', this.id);totalAmount()\"><i class='fa-solid fa-cart-shopping cart'></i></button>
+                        <button type='button' class='cartButt' id='$i' onclick=\"resetIndexes('cartButt', 'inpColor');removeNotify('Are you sure you want to remove this item from your cart?', this.id);totalAmount()\"><i class='fa-solid fa-cart-xmark cart'></i></button>
                         <input type='hidden' class='inpColor' id='inp$i' value=\"{$tab['color']}\">
                     </form>
                 </div>
@@ -67,11 +66,11 @@
     }
 
 
-        $sql2="SELECT adress FROM client WHERE id_client={$_SESSION['id_client']}";
+        $sql2="SELECT address FROM client WHERE id_client={$_SESSION['id_client']}";
         $query2=mysqli_query($conn, $sql2);
         $tab2=mysqli_fetch_assoc($query2);
         $isAllowed=0;
-        if($tab2['adress']!=""){
+        if($tab2['address']!=""){
             $isAllowed=1;
         }
     ?>
@@ -117,7 +116,7 @@
             <i class="fa-regular fa-credit-card fa-shake"></i>&ensp;Purchase All Items
         </button></center>    
     <div id='empty-cart-div'>
-        <i class='fa-regular fa-cart-shopping fa-shake' id='cartIcon'></i>
+        <i class="fa-regular fa-cart-xmark fa-beat" id="cartIcon"></i>
         <p id='header'>Your cart is empty!</p>
         <p id='par'>Your cart is currently empty. Start browsing our selection of products to add items to your cart!</p>
     </div>

@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>    
     <link rel="shortcut icon" href="logo image.png" type="image/x-icon">
     <link rel="stylesheet" href="product.css">
     <script src="product.js" defer></script>
@@ -53,7 +52,7 @@
             $tab4=mysqli_fetch_assoc($query4);
             $ratingsTotal=$tab4['COUNT(*)'];
         
-
+            include("fetch_xml.php");
             function isInCart(){
                 global $conn;
                 $sql="SELECT color1 FROM articles WHERE id_article={$_GET['id_article']}";
@@ -61,11 +60,9 @@
                 $tab=mysqli_fetch_row($query);
 
                 if($tab[0]!=NULL){ 
-                    $sql2="SELECT color FROM colors WHERE id_color=$tab[0]";
-                    $query2=mysqli_query($conn, $sql2);
-                    $tab2=mysqli_fetch_row($query2);
+                    $color=fetch($tab[0]);
 
-                    $sql3="SELECT * FROM cart WHERE id_client={$_SESSION['id_client']} AND id_article={$_GET['id_article']} AND color='$tab2[0]'";
+                    $sql3="SELECT * FROM cart WHERE id_client={$_SESSION['id_client']} AND id_article={$_GET['id_article']} AND color='$color'";
                     $query3=mysqli_query($conn, $sql3);
                     if(mysqli_num_rows($query3)){
                         return 1;
@@ -189,11 +186,10 @@
                             }
                             </script>";
                         for ($k=1; $k <= numberOfColors(); $k++) { 
-                            $sql7="SELECT color FROM colors WHERE id_color={$tab6["color$k"]}";
-                            $query7=mysqli_query($conn, $sql7);
-                            $tab7=mysqli_fetch_assoc($query7);
-                            echo "<div class='colors' id='color$k' style='background-color:{$tab7["color"]};' onclick=\"isInCart({$_GET['id_article']}, '{$tab7['color']}');addCheck('check-icon$k');switchItemColor(this.id);colorDivId(this.id);\"><img class='check-icons' id='check-icon$k' src='check mark.png' alt='check icon'></div>";
-                            echo "<input type='hidden' id='colorInp$k' value='{$tab7["color"]}'>";
+                            $color=fetch($tab6["color$k"]);
+
+                            echo "<div class='colors' id='color$k' style='background-color:$color;' onclick=\"isInCart({$_GET['id_article']}, '$color');addCheck('check-icon$k');switchItemColor(this.id);colorDivId(this.id);\"><img class='check-icons' id='check-icon$k' src='check mark.png' alt='check icon'></div>";
+                            echo "<input type='hidden' id='colorInp$k' value='$color'>";
                         }
                         }
                          if(numberOfColors()<=1){
@@ -227,11 +223,11 @@
                     $description=str_replace("'", "\'", $description);
 
                     if(isset($_SESSION) && !empty($_SESSION)){
-                        $sql="SELECT adress FROM client WHERE id_client={$_SESSION['id_client']}";
+                        $sql="SELECT address FROM client WHERE id_client={$_SESSION['id_client']}";
                         $query=mysqli_query($conn, $sql);
                         $tab=mysqli_fetch_assoc($query);
                         $isAllowed=0;
-                        if($tab['adress']!=""){
+                        if($tab['address']!=""){
                             $isAllowed=1; 
                         }
                     }

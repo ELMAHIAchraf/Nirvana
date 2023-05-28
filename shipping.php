@@ -5,7 +5,6 @@
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="logo image.png" type="image/x-icon">
     <link rel="stylesheet" href="shipping.css">
     <script src="shipping.js" defer></script>
@@ -94,7 +93,7 @@
         }
     ?>
     <div id='empty-shipping-div'>
-        <i class='fa-regular fa-cart-shopping fa-shake' id='shippingIcon'></i>
+        <i class='fa-solid fa-truck-fast fa-beat' id='shippingIcon'></i>
         <p id='header'>Your shipping cart is empty!</p>
         <p id='par'>Your shipping cart is currently empty. Start buying products to add items to your shipping cart!</p>
     </div>
