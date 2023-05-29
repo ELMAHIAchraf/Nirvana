@@ -46,6 +46,17 @@
             }
             return $percentage;
         }
+            function isInWishlist($id_article){
+                global $conn;
+                $sql="SELECT * FROM wishlist where id_article=$id_article AND id_client={$_SESSION['id_client']}";
+                $query=mysqli_query($conn, $sql);
+                $tab=mysqli_fetch_assoc($query);
+                if(!empty($tab)){
+                    return 1;
+                }else{
+                    return 0;
+                }
+            }
         
         $sql4="SELECT COUNT(*) FROM orders WHERE id_article={$_GET['id_article']} AND rating BETWEEN 0.5 AND 5";
             $query4=mysqli_query($conn, $sql4);
@@ -106,6 +117,25 @@
         <i class="fa-solid fa-angle-right" id="right-arrow" onclick="slideRight()" onmouseover="arrowHover(this.id)" onmouseleave="arrowMouseLeave(this.id)"></i>
     </div>
     <div id="main">
+    
+    <div id="wishlist" onclick="heartClick();addToWishlist()">
+        <?php
+            $isInWish=isInWishlist($tab6['id_article']);
+            if($isInWish==1){
+                echo "<i class='fa-solid fa-heart-crack heart'></i>&nbsp; Remove";
+            }else{
+                echo "<i class='fa-solid fa-heart heart'></i>&nbsp; Add to wishlist";
+            }
+        ?>
+    </div>
+    <?php
+            $isInWish=isInWishlist($tab6['id_article']);
+            if($isInWish==1){
+                echo "<script>document.getElementById('wishlist').style.backgroundColor='#ff4444';</script>";
+            }else{
+                echo "<script>document.getElementById('wishlist').style.backgroundColor='#ff8b8b';</script>";
+            }
+    ?> 
     <div id="container">
             <div id="product-imgs">
                 <img id="product-img" src="" alt="Article images" onclick="imageDisplay()">
@@ -125,6 +155,7 @@
             </div>
             
             <div id="product-infos">
+                <input type="hidden" id="product_id" value="<?php echo $tab6['id_article'] ?>">
                 <p id="product-name"><?php echo $tab6['name_article'] ?></p>
                 <!-- number_format take the value then the decimal number then a string to represent the decimal poiny the a string to separate thousands -->
                 <p id="product-price"><?php echo "$".number_format($tab6['price'],2,",",".") ?></p>

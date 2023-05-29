@@ -84,6 +84,45 @@
                 }
                 k++;
             }
+            let c=0;
+            function heartClick(){
+                if(document.getElementById('wishlist').style.backgroundColor=="rgb(255, 68, 68)"){
+                    c=1;
+                }
+                if(c%2==0){
+                    document.getElementById('wishlist').innerHTML="<i class='fa-solid fa-heart-crack heart'></i>&nbsp; Remove";
+                    document.getElementById('wishlist').style.backgroundColor='#ff4444';
+                }else{
+                    document.getElementById('wishlist').innerHTML="<i class='fa-solid fa-heart heart'></i>&nbsp; Add to wishlist";
+                    document.getElementById('wishlist').style.backgroundColor='#ff8b8b';
+                }
+                c++;
+            }
+            function addToWishlist(){
+                let xhr = new XMLHttpRequest();
+                let id_article=document.getElementById('product_id').value;
+                if(document.getElementById('wishlist').style.backgroundColor=="rgb(255, 68, 68)"){
+                    xhr.onload=function(){
+                        if(xhr.status==200){
+                            document.getElementById('heartCountNum').innerHTML=xhr.responseText;
+                        }
+                    }
+                    xhr.open("POST", "wishlistAdd.php", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.send("id_article="+id_article);
+                }else{
+                    xhr.onload=function(){
+                        if(xhr.status==200){
+                            document.getElementById('heartCountNum').innerHTML=xhr.responseText;
+                        }
+                    }
+                    xhr.open("POST", "wishlistRemove.php", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.send("id_article="+id_article); 
+
+                }
+            }
+
             let clrDivId='color1';
             function colorDivId(id){
                 clrDivId=id;
