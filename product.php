@@ -120,20 +120,33 @@
     
     <div id="wishlist" onclick="heartClick();addToWishlist()">
         <?php
-            $isInWish=isInWishlist($tab6['id_article']);
-            if($isInWish==1){
-                echo "<i class='fa-solid fa-heart-crack heart'></i>&nbsp; Remove";
+            if(isset($_SESSION) && !empty($_SESSION)){
+                $isInWish=isInWishlist($tab6['id_article']);
+                if($isInWish==1){
+                    echo "<i class='fa-solid fa-heart-crack heart'></i>&nbsp; Remove";
+                }else{
+                    echo "<i class='fa-solid fa-heart heart'></i>&nbsp; Add to wishlist";
+                }
             }else{
-                echo "<i class='fa-solid fa-heart heart'></i>&nbsp; Add to wishlist";
+                echo "<i class='fa-solid fa-heart heart'></i>&nbsp; Add to wishlist"; 
             }
         ?>
     </div>
     <?php
-            $isInWish=isInWishlist($tab6['id_article']);
-            if($isInWish==1){
-                echo "<script>document.getElementById('wishlist').style.backgroundColor='#ff4444';</script>";
+            if(isset($_SESSION) && !empty($_SESSION)){
+                $isInWish=isInWishlist($tab6['id_article']);
+                if($isInWish==1){
+                    echo "<script>document.getElementById('wishlist').style.backgroundColor='#ff4444';</script>";
+                }else{
+                    echo "<script>document.getElementById('wishlist').style.backgroundColor='#ff8b8b';</script>";
+                }
             }else{
-                echo "<script>document.getElementById('wishlist').style.backgroundColor='#ff8b8b';</script>";
+                echo "<script>
+                            document.getElementById('wishlist').onclick='';
+                            document.getElementById('wishlist').addEventListener('click', function(){
+                                notify('Please log in to save this product to your wishlist.')
+                            });
+                        </script>";
             }
     ?> 
     <div id="container">

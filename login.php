@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="logo image.png" type="image/x-icon">
+    <link rel="stylesheet" data-purpose="Layout StyleSheet" title="Default" href="/css/app-af6a05f42b013986b481566363f0186f.css?vsn=d">
+    <link rel="stylesheet" data-purpose="Layout StyleSheet" title="Web Awesome" href="/css/app-wa-cc491567b46eab1188c6538ebc462e7d.css?vsn=d">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css">
     <link rel="stylesheet" href="login.css">
     <script src="login.js" defer></script>
     <title>Login</title>
@@ -26,7 +32,7 @@
             </div>
             <br><input id="check" type="checkbox" name="check" value="checked"><label for="check">Remember me</label>
             <a href="password_recovery.php" target="_blank">Forgot you password?</a>
-            <br><span id="loginFail">Incorrect username or password</span>
+            <br><span id="loginFail">Incorrect email or password</span>
             <br><input id="log" type="submit" name="log" value="Login">
         </form>
 
@@ -49,16 +55,13 @@
         }
     </script>
     <?php
-        //Establishing database connection
         include("connexion.php");
-        //Sign up button code
         if(isset($_POST['sign'])){
             if(isset($_POST['fname']) && !empty($_POST['fname']) and
                 isset($_POST['lname']) && !empty($_POST['lname']) and
                 isset($_POST['email']) && !empty($_POST['email']) and
                 isset($_POST['pwd']) && !empty($_POST['pwd'])){  
 
-                //Assigning clean input values to variables
                 $email=filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
                 $email=filter_var($email, FILTER_VALIDATE_EMAIL);
 
@@ -72,7 +75,6 @@
                     $lname=mysqli_real_escape_string($conn, htmlspecialchars(trim($_POST['lname'])));
                     $pwd=mysqli_real_escape_string($conn, htmlspecialchars(trim($_POST['pwd'])));
                     $pwd=password_hash($pwd, PASSWORD_DEFAULT);
-                    //Saving the inputs values in database to complete the sign up process
                     $sql2="INSERT INTO client VALUES('', '$fname', '$lname', '$email', '$pwd')";
                     if(mysqli_query($conn, $sql2)){
                         echo "<script>
@@ -95,48 +97,35 @@
                 }
             } 
         }
-        //Login button code
         if(isset($_POST['log'])){
             if(isset($_POST['email']) && !empty($_POST['email']) and
                isset($_POST['pwd']) && !empty($_POST['pwd'])){
-                //Assigning clean input values to variables
                 $email=filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
                 $email=filter_var($email, FILTER_VALIDATE_EMAIL);
                 $pwd=mysqli_real_escape_string($conn, htmlspecialchars(trim($_POST['pwd'])));
-                //Checking if the inputed email exists in the database
                 $sql="SELECT * FROM client WHERE email='$email'";
                 $query=mysqli_query($conn, $sql);
                 $tab=mysqli_fetch_assoc($query);
-                    //Checking if the inputed password is correct
                     if(password_verify($pwd, $tab['password_client'])){
-                        //Checking if the remember me checkbox is checked 
                         if(isset($_POST['check'])){
-                            //Generating a token
                             $token=bin2hex(random_bytes(32));
-                            //Setting the creation date of the token
                             $creation_date=date('Y-m-d');
-                            //Setting the expiration date of the token
                             $expiration_date=date('Y-m-d', time()+7*24*3600);
-                            //Inserting the token informations inside of the token table in the database
-                            //The id_client column in the token table is a foreign key of the id_client column in the client table
                             $sql2="INSERT INTO token VALUES('$token', '$creation_date', '$expiration_date', '{$tab['id_client']}')";
 
-                            //Updating the token row in the token table instead of Inserting a new row if a client's token already exists
                             $sql3="SELECT * FROM token WHERE id_client='{$tab['id_client']}'";
                             $query3=mysqli_query($conn, $sql3);
                             $tab3=mysqli_fetch_assoc($query3);
                             if(!empty($tab3)){
                                 $sql2="UPDATE token SET token='$token', creation_date='$creation_date', expiration_date='$expiration_date' WHERE id_client='{$tab['id_client']}'";
                             }
-                            //Creating a cookie name token where id client's token is stored
                             if(mysqli_query($conn, $sql2)){
-                                setcookie('token', $token, time()+3*24*3600);
+                                setcookie("token", $token, time()+3*24*3600, "/");
                             }
                         }
                         $_SESSION['name_client']=$tab['Fname'];
                         $_SESSION['id_client']=$tab['id_client'];
                         $_SESSION['email_client']=$tab['email'];
-                        //redirecting the client to the home page
                         header('Location: http://localhost/Login/Nirvana/home.php');
                     }else{
                         echo "<script>
@@ -145,7 +134,6 @@
                     }
         }
         }
-        //Cheking if the client has a token cookie in order to redirect him to the home page without him loging manually
         
         ?>
 
