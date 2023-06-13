@@ -31,7 +31,7 @@
             <button type="button" id="show-password" onclick="showPassword()"><i id="eyeIcon" class="fa-solid fa-eye-slash"></i></button>
             </div>
             <br><input id="check" type="checkbox" name="check" value="checked"><label for="check">Remember me</label>
-            <a href="password_recovery.php" target="_blank">Forgot you password?</a>
+            <a href="password_recovery.php" target="_blank">Forgot your password?</a>
             <br><span id="loginFail">Incorrect email or password</span>
             <br><input id="log" type="submit" name="log" value="Login">
         </form>

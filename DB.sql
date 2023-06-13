@@ -16,7 +16,6 @@ CREATE TABLE token(
 );
 CREATE TABLE Precovery(
     token varchar(255) PRIMARY KEY,
-    email varchar(50),
     token_creation_time DATETIME,
     id_client INT,
     FOREIGN KEY (id_client) REFERENCES client(id_client)
