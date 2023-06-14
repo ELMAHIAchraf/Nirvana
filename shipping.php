@@ -10,7 +10,7 @@
     <script src="shipping.js" defer></script>
     <title>Shipping</title>
 </head>
-<body onload="isShippingEmpty()">
+<body onload="isShippingEmpty()" onclick="hideSearchResults()">
     <script>
         function redirect(id_article){
             let url="http\://localhost/Login/Nirvana/product.php?id_article="+id_article;

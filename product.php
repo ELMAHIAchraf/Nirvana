@@ -105,7 +105,7 @@
                     </script>";
     ?>
 
-<body onload="slide();starsRating(<?php echo $rate ?>);">
+<body onload="slide();starsRating(<?php echo $rate ?>);" onclick="hideSearchResults()">
     <?php 
         include("NavBar.php");
     ?>

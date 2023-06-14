@@ -10,7 +10,7 @@
     <script src="cart.js" defer></script>
     <title>Cart</title>
 </head>
-<body onload="totalAmount()">
+<body onload="totalAmount()" onclick="hideSearchResults()">
     <script>
         function redirect(id_article){
             let url="http\://localhost/Login/Nirvana/product.php?id_article="+id_article;

@@ -11,7 +11,7 @@
     <script src="checkout.js" defer></script>
     <title>Checkout</title>
 </head>
-<body>
+<body onclick="hideSearchResults()">
 <?php 
     include('NavBar.php');
     if(isset($_GET['id_article']) && isset($_GET['quantity'])){

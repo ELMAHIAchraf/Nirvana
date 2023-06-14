@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="order cancellation.css">
     <title>order cancellation </title>
 </head>
-<body onload="document.getElementById('orderID').focus()">
+<body onload="document.getElementById('orderID').focus()" onclick="hideSearchResults()">
     <?php 
         include('NavBar.php');
         include('notification code.php');

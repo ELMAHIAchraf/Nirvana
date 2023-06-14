@@ -10,7 +10,7 @@
     <script src="wishlist.js" defer></script>
     <title>Wishlist</title>
 </head>
-<body>
+<body onclick="hideSearchResults()">
     <script>
         function redirect(id_article){
             let url="http\://localhost/Login/Nirvana/product.php?id_article="+id_article;

@@ -99,7 +99,7 @@
         
     </style>
 </head>
-<body>  
+<body onclick="hideSearchResults()">  
     <?php 
         include('NavBar.php');
 
