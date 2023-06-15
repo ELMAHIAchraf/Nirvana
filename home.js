@@ -119,3 +119,27 @@ function normalHeart(productIndex){
     document.getElementsByClassName('heart')[productIndex].setAttribute('class', 'fa-solid fa-heart heart');
 }        
 
+let images = ['affiche1.jpg', 'affiche2.jpg', 'affiche3.jpg'];
+let i=0;
+function slide(){
+    if(i > images.length-1){
+        i=0;
+    }
+    document.getElementById('poster').src = images[i];
+    slidePlay=setTimeout(slide, 3000);
+    i++;
+}
+function previous(){
+	i--;
+	if(i<0){
+		i=(images.length)-1;
+	}
+	document.getElementById("poster").src=images[i];
+}
+function next(){
+	i++;
+	if(i>(images.length)-1){
+		i=0;
+	}
+	document.getElementById("poster").src=images[i];
+}

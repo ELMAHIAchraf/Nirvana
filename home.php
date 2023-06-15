@@ -10,7 +10,7 @@
     <script src="home.js" defer></script>
     <title>Home</title>
 </head>
-<body onload="loadedCategory()" onclick="hideSearchResults()">
+<body onload="loadedCategory() "" onclick="hideSearchResults()">
             <?php
                 include("connexion.php");
 
@@ -53,9 +53,11 @@
     
 
         <div id="main">
-            <i class="fa-solid fa-angle-left img-arrows" id="left-arrow"></i>
-            <div id="image-div"></div>
-            <i class="fa-solid fa-angle-right img-arrows" id="right-arrow"></i> 
+            <i class="fa-solid fa-angle-left img-arrows" id="left-arrow" onclick="previous()"></i>
+            <div id="image-div">
+                <img id="poster" src="affiche1.jpg" alt="poster">
+            </div>
+            <i class="fa-solid fa-angle-right img-arrows" id="right-arrow" onclick="next()"></i> 
             
             <div id="products-div">
                 <script>
