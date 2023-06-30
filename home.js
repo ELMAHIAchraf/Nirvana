@@ -120,14 +120,14 @@ function normalHeart(productIndex){
 }        
 
 let images = ['affiche1.jpg', 'affiche2.jpg', 'affiche3.jpg'];
-let i=0;
+let i=-1;
 function slide(){
+    i++;
     if(i > images.length-1){
         i=0;
     }
     document.getElementById('poster').src = images[i];
     slidePlay=setTimeout(slide, 3000);
-    i++;
 }
 function previous(){
 	i--;

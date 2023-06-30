@@ -1,4 +1,4 @@
-<?php
+ <?php
     if(isset($_POST['amount']) && !empty($_POST['amount']) and
         isset($_POST['description']) && !empty($_POST['description'])){
         include('vendor/autoload.php');

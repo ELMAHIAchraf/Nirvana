@@ -10,7 +10,7 @@
     <script src="home.js" defer></script>
     <title>Home</title>
 </head>
-<body onload="loadedCategory() "" onclick="hideSearchResults()">
+<body onload="loadedCategory();slide()" onclick="hideSearchResults()">
             <?php
                 include("connexion.php");
 
