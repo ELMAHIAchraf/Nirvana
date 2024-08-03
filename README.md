@@ -18,7 +18,7 @@ The site includes features such as:
 +   Order tracking and email notifications
 +   Product reviews and ratings
 
-## Conception Diagrams
+## Conception Diagrams (MERISE)
 ### MCD
 ![Nirvana_MCD](https://github.com/user-attachments/assets/76ca8b65-8e82-439e-9174-75027bbc765a)
 
