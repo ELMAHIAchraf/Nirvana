@@ -33,7 +33,8 @@ The site includes features such as:
 +	**Tokens_authentification** (token, creation_date, expiration_date, #id_client)
 +	**Tokens_pw_recovery** (token, token_creation_time, #id_client)
 
-## Technologies
+## Technology Stack
+
 ### Frontend
 +  ![html5](https://github.com/user-attachments/assets/7b531643-ae30-4a48-b3ff-a92c6b8b9f46)  **HTML**
 +  ![css3](https://github.com/user-attachments/assets/ce29d602-f9fc-4e66-919f-0c5927cd85e3)   **CSS**
