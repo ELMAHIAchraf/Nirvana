@@ -59,7 +59,7 @@ class PaymentMethodService extends \Stripe\Service\AbstractService
 
     /**
      * Creates a PaymentMethod object. Read the <a
-     * href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
+     * href="/docs/stripe-../JS/reference#stripe-create-payment-method">Stripe.js
      * reference</a> to learn how to create PaymentMethods via Stripe.js.
      *
      * Instead of creating a PaymentMethod directly, we recommend using the <a

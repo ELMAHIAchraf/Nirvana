@@ -100,7 +100,7 @@ class PaymentIntentService extends \Stripe\Service\AbstractService
      * <code>capture_method</code> is set to <code>manual</code>). If the
      * <code>confirmation_method</code> is <code>automatic</code>, payment may be
      * attempted using our <a
-     * href="/docs/stripe-js/reference#stripe-handle-card-payment">client SDKs</a> and
+     * href="/docs/stripe-../JS/reference#stripe-handle-card-payment">client SDKs</a> and
      * the PaymentIntent’s <a
      * href="#payment_intent_object-client_secret">client_secret</a>. After
      * <code>next_action</code>s are handled by the client, no additional confirmation
