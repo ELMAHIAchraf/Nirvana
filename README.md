@@ -1,8 +1,8 @@
 <h1 align="center">Nirvana</h1>
 
-<p align="center">
+<div align="center">
   <img src="https://github.com/user-attachments/assets/15f81713-45d2-484e-9ac1-c9681aad9d19" width="200px" alt="Logo">
-</p>
+</div>
 
 ## Description
 Nirvana is an e-commerce site designed to provide an easy-to-use platform for customers. It offers a wide variety of products and ensures a secure and reliable online shopping experience.
